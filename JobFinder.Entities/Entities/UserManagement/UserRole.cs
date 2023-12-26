@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JobFinder.Entities.Entities.UserManagement
 {
-    public class UserRole : BaseEntitiy
+    public class UserRole : BaseEntity
     {
         public int UserId { get; set; }
         public virtual User User { get; set; }

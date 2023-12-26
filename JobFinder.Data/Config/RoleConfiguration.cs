@@ -8,7 +8,6 @@ namespace JobFinder.Data.Config
 {
     public class RoleConfiguration
     {
-        // implemented in RolePermission Configuration
         // implemented in UserRole Configuration
     }
 }

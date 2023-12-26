@@ -14,7 +14,7 @@ namespace JobFinder.Data.Config
         // implemented in Apllication Configuration
         public void Configure(EntityTypeBuilder<Company> builder)
         {
-            // implemented in Application Configuration
+            // implemented in Job Configuration
             // implemented in User Configuration
         }
     }

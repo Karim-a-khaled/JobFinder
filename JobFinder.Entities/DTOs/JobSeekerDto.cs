@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JobFinder.Entities.Entities
+namespace JobFinder.Entities.DTOs
 {
-    public class File : BaseEntity
+    public class JobSeekerDto
     {
     }
 }

@@ -30,18 +30,14 @@ namespace JobFinder.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CoverLetter")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("JobId")
+                        .HasColumnType("int");
 
                     b.Property<int>("JobSeekerId")
                         .HasColumnType("int");
@@ -52,12 +48,9 @@ namespace JobFinder.Data.Migrations
                     b.Property<int>("ModifiedById")
                         .HasColumnType("int");
 
-                    b.Property<int>("MyProperty")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
+                    b.HasIndex("JobId");
 
                     b.HasIndex("JobSeekerId");
 
@@ -96,9 +89,53 @@ namespace JobFinder.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
                     b.ToTable("Companies");
+                });
+
+            modelBuilder.Entity("JobFinder.Entities.Entities.Job", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ModifiedById")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("Jobs");
                 });
 
             modelBuilder.Entity("JobFinder.Entities.Entities.JobSeeker", b =>
@@ -109,6 +146,10 @@ namespace JobFinder.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CoverLetter")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CreatedById")
                         .HasColumnType("int");
 
@@ -121,41 +162,21 @@ namespace JobFinder.Data.Migrations
                     b.Property<int>("ModifiedById")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("YearsOfExperience")
+                        .HasColumnType("int");
 
                     b.Property<bool>("isFresh")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
                     b.ToTable("JobSeekers");
-                });
-
-            modelBuilder.Entity("JobFinder.Entities.Entities.UserManagement.Permission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ModificationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ModifiedById")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Permissions");
                 });
 
             modelBuilder.Entity("JobFinder.Entities.Entities.UserManagement.Role", b =>
@@ -193,41 +214,6 @@ namespace JobFinder.Data.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("JobFinder.Entities.Entities.UserManagement.RolePermission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ModificationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ModifiedById")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PermissionId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("RolePermission");
-                });
-
             modelBuilder.Entity("JobFinder.Entities.Entities.UserManagement.User", b =>
                 {
                     b.Property<int>("Id")
@@ -235,9 +221,6 @@ namespace JobFinder.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CompanyId")
-                        .HasColumnType("int");
 
                     b.Property<int>("CreatedById")
                         .HasColumnType("int");
@@ -247,10 +230,8 @@ namespace JobFinder.Data.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("JobSeekerId")
-                        .HasColumnType("int");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("ModificationDate")
                         .HasColumnType("datetime2");
@@ -258,26 +239,18 @@ namespace JobFinder.Data.Migrations
                     b.Property<int>("ModifiedById")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("isCompany")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId")
-                        .IsUnique()
-                        .HasFilter("[CompanyId] IS NOT NULL");
-
-                    b.HasIndex("JobSeekerId")
-                        .IsUnique()
-                        .HasFilter("[JobSeekerId] IS NOT NULL");
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -319,55 +292,54 @@ namespace JobFinder.Data.Migrations
 
             modelBuilder.Entity("JobFinder.Entities.Entities.Application", b =>
                 {
-                    b.HasOne("JobFinder.Entities.Entities.Company", "Company")
+                    b.HasOne("JobFinder.Entities.Entities.Job", "Job")
                         .WithMany("Applications")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("JobId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("JobFinder.Entities.Entities.JobSeeker", "JobSeeker")
                         .WithMany("Applications")
                         .HasForeignKey("JobSeekerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Company");
+                    b.Navigation("Job");
 
                     b.Navigation("JobSeeker");
                 });
 
-            modelBuilder.Entity("JobFinder.Entities.Entities.UserManagement.RolePermission", b =>
+            modelBuilder.Entity("JobFinder.Entities.Entities.Company", b =>
                 {
-                    b.HasOne("JobFinder.Entities.Entities.UserManagement.Permission", "Permission")
-                        .WithMany("RolePermissions")
-                        .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("JobFinder.Entities.Entities.UserManagement.User", "User")
+                        .WithOne("Company")
+                        .HasForeignKey("JobFinder.Entities.Entities.Company", "UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("JobFinder.Entities.Entities.UserManagement.Role", "Role")
-                        .WithMany("RolePermissions")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Permission");
-
-                    b.Navigation("Role");
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("JobFinder.Entities.Entities.UserManagement.User", b =>
+            modelBuilder.Entity("JobFinder.Entities.Entities.Job", b =>
                 {
                     b.HasOne("JobFinder.Entities.Entities.Company", "Company")
-                        .WithOne("User")
-                        .HasForeignKey("JobFinder.Entities.Entities.UserManagement.User", "CompanyId");
-
-                    b.HasOne("JobFinder.Entities.Entities.JobSeeker", "JobSeeker")
-                        .WithOne("User")
-                        .HasForeignKey("JobFinder.Entities.Entities.UserManagement.User", "JobSeekerId");
+                        .WithMany("Jobs")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Company");
+                });
 
-                    b.Navigation("JobSeeker");
+            modelBuilder.Entity("JobFinder.Entities.Entities.JobSeeker", b =>
+                {
+                    b.HasOne("JobFinder.Entities.Entities.UserManagement.User", "User")
+                        .WithOne("JobSeeker")
+                        .HasForeignKey("JobFinder.Entities.Entities.JobSeeker", "UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("JobFinder.Entities.Entities.UserManagement.UserRole", b =>
@@ -375,13 +347,13 @@ namespace JobFinder.Data.Migrations
                     b.HasOne("JobFinder.Entities.Entities.UserManagement.Role", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("JobFinder.Entities.Entities.UserManagement.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Role");
@@ -391,34 +363,32 @@ namespace JobFinder.Data.Migrations
 
             modelBuilder.Entity("JobFinder.Entities.Entities.Company", b =>
                 {
-                    b.Navigation("Applications");
+                    b.Navigation("Jobs");
+                });
 
-                    b.Navigation("User")
-                        .IsRequired();
+            modelBuilder.Entity("JobFinder.Entities.Entities.Job", b =>
+                {
+                    b.Navigation("Applications");
                 });
 
             modelBuilder.Entity("JobFinder.Entities.Entities.JobSeeker", b =>
                 {
                     b.Navigation("Applications");
-
-                    b.Navigation("User")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("JobFinder.Entities.Entities.UserManagement.Permission", b =>
-                {
-                    b.Navigation("RolePermissions");
                 });
 
             modelBuilder.Entity("JobFinder.Entities.Entities.UserManagement.Role", b =>
                 {
-                    b.Navigation("RolePermissions");
-
                     b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("JobFinder.Entities.Entities.UserManagement.User", b =>
                 {
+                    b.Navigation("Company")
+                        .IsRequired();
+
+                    b.Navigation("JobSeeker")
+                        .IsRequired();
+
                     b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618

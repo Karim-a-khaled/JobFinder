@@ -21,4 +21,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\JobFinder.Data\JobFinder.Data.csproj" />
+    <ProjectReference Include="..\JobFinder.Entities\JobFinder.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

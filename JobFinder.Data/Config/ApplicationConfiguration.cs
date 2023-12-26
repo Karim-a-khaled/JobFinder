@@ -17,12 +17,6 @@ namespace JobFinder.Data.Config
                 .WithMany(js => js.Applications)
                 .HasForeignKey(a => a.JobSeekerId)
                 .OnDelete(DeleteBehavior.NoAction);
-
-            builder.HasOne(a => a.Company)
-                .WithMany(c => c.Applications)
-                .HasForeignKey(a => a.CompanyId)
-                .OnDelete(DeleteBehavior.NoAction);
-
         }
     }
 }

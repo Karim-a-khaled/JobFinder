@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using JobFinder.Entities.Entities;
 
 namespace JobFinder.Data.Config
 {
@@ -17,7 +18,6 @@ namespace JobFinder.Data.Config
 
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.Property(b => b.Name).HasMaxLength(200);//.IsRequired();
             builder.Property(b => b.Email).HasMaxLength(200).IsRequired();
             builder.Property(b => b.Password).HasMaxLength(200).IsRequired();
             builder.HasIndex(b => b.Email).IsUnique();
@@ -26,12 +26,12 @@ namespace JobFinder.Data.Config
 
             builder.HasOne(u => u.JobSeeker)
                 .WithOne(js => js.User)
-                .HasForeignKey<User>(u => u.JobSeekerId)
+                .HasForeignKey<JobSeeker>(js => js.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(u => u.Company)
                 .WithOne(js => js.User)
-                .HasForeignKey<User>(u => u.CompanyId)
+                .HasForeignKey<Company>(c => c.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
 

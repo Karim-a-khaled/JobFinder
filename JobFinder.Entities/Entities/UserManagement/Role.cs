@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace JobFinder.Entities.Entities.UserManagement
 {
-    public class Role : BaseEntitiy
+    public class Role : BaseEntity
     {
         public string Name { get; set; }
         public int? Timer { get; set; }
         public virtual ICollection<UserRole> UserRoles { get; set; }
-        public virtual ICollection<RolePermission> RolePermissions { get; set; }
-
         public Enums.RoleEnum RoleType { get; set; }
     }
 }
