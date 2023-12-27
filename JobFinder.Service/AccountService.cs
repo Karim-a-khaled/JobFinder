@@ -29,22 +29,25 @@ namespace JobFinder.Service
         }
 
 
-        public async Task<User> Register(RegistrationDto request)
+        public async Task<User> Register(RegisterationDto request)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
-            if (user is not null)
+            if (user != null)
                 return null;
 
-            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            byte[] passwordHash;
+            CreatePasswordHash(request.Password, out passwordHash);
+
             user = new User
             {
                 Email = request.Email,
-                PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt,
+                Password = Convert.ToBase64String(passwordHash), 
+                CreationDate = DateTime.Now
             };
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+
             return user;
         }
 
@@ -54,7 +57,9 @@ namespace JobFinder.Service
             if (user is null)
                 return null;
 
-            if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
+            byte[] storedPasswordHash = Convert.FromBase64String(user.Password); // Convert the stored hash from a Base64 string back to a byte array
+
+            if (!VerifyPasswordHash(request.Password, storedPasswordHash))
                 return null;
 
             string token = CreateToken(user);
@@ -83,17 +88,16 @@ namespace JobFinder.Service
 
             return jwt;
         }
-        public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        public void CreatePasswordHash(string password, out byte[] passwordHash)
         {
             using (var hmac = new HMACSHA512())
             {
-                passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
             }
         }
-        public bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        public bool VerifyPasswordHash(string password, byte[] passwordHash)
         {
-            using (var hmac = new HMACSHA512(passwordSalt))
+            using (var hmac = new HMACSHA512())
             {
                 var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
                 return computedHash.SequenceEqual(passwordHash);

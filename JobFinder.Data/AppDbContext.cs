@@ -1,4 +1,5 @@
-﻿using JobFinder.Entities.Entities;
+﻿using JobFinder.Data.SeedData;
+using JobFinder.Entities.Entities;
 using JobFinder.Entities.Entities.UserManagement;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,7 +25,10 @@ namespace JobFinder.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //modelBuilder.RolesSeedData();
+            modelBuilder.UserSeed();
+            modelBuilder.RolesSeedData();
+            modelBuilder.CompanySeed();
+            modelBuilder.JobSeekerSeed();
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
         }

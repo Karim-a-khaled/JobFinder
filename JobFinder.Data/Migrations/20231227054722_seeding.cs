@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace JobFinder.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial2 : Migration
+    public partial class seeding : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,8 +23,6 @@ namespace JobFinder.Data.Migrations
                     Timer = table.Column<int>(type: "int", nullable: true),
                     RoleType = table.Column<int>(type: "int", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedById = table.Column<int>(type: "int", nullable: false),
-                    ModifiedById = table.Column<int>(type: "int", nullable: false),
                     ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -40,8 +40,6 @@ namespace JobFinder.Data.Migrations
                     Password = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     isCompany = table.Column<bool>(type: "bit", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedById = table.Column<int>(type: "int", nullable: false),
-                    ModifiedById = table.Column<int>(type: "int", nullable: false),
                     ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -56,12 +54,11 @@ namespace JobFinder.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedById = table.Column<int>(type: "int", nullable: false),
-                    ModifiedById = table.Column<int>(type: "int", nullable: false),
                     ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -80,13 +77,12 @@ namespace JobFinder.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     YearsOfExperience = table.Column<int>(type: "int", nullable: false),
-                    isFresh = table.Column<bool>(type: "bit", nullable: false),
+                    IsFresh = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    CoverLetter = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedById = table.Column<int>(type: "int", nullable: false),
-                    ModifiedById = table.Column<int>(type: "int", nullable: false),
                     ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -108,8 +104,6 @@ namespace JobFinder.Data.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false),
                     RoleId = table.Column<int>(type: "int", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedById = table.Column<int>(type: "int", nullable: false),
-                    ModifiedById = table.Column<int>(type: "int", nullable: false),
                     ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -137,8 +131,6 @@ namespace JobFinder.Data.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CompanyId = table.Column<int>(type: "int", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedById = table.Column<int>(type: "int", nullable: false),
-                    ModifiedById = table.Column<int>(type: "int", nullable: false),
                     ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -157,11 +149,11 @@ namespace JobFinder.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsSubmitted = table.Column<bool>(type: "bit", nullable: false),
+                    CoverLetter = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     JobSeekerId = table.Column<int>(type: "int", nullable: false),
                     JobId = table.Column<int>(type: "int", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedById = table.Column<int>(type: "int", nullable: false),
-                    ModifiedById = table.Column<int>(type: "int", nullable: false),
                     ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -177,6 +169,56 @@ namespace JobFinder.Data.Migrations
                         column: x => x.JobId,
                         principalTable: "Jobs",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "CreationDate", "ModificationDate", "Name", "RoleType", "Timer" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 12, 27, 0, 0, 0, 0, DateTimeKind.Local), "JobSeeker", 0, null },
+                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 12, 27, 0, 0, 0, 0, DateTimeKind.Local), "Employer", 0, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "CreationDate", "Email", "ModificationDate", "Password", "isCompany" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1821), "info@acme.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", true },
+                    { 2, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1832), "contact@globex.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", true },
+                    { 3, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1833), "contact@microsoft.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", true },
+                    { 4, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1834), "contact@uber.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", true },
+                    { 5, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1835), "support@initech.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", true },
+                    { 6, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1836), "john.doe@example.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", false },
+                    { 7, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1837), "jane.smith@example.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", false },
+                    { 8, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1838), "bob.johnson@example.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", false },
+                    { 9, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1839), "alice.williams@example.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", false },
+                    { 10, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1839), "random@example.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", false }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Companies",
+                columns: new[] { "Id", "Address", "CreationDate", "Email", "ModificationDate", "Name", "PhoneNumber", "UserId" },
+                values: new object[,]
+                {
+                    { 1, "123 Main St, Anytown, CA 12345", new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1957), "info@acme.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Acme Corporation", "1-800-555-1212", 1 },
+                    { 2, "456 Elm St, Business City, NY 54321", new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1958), "contact@globex.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Globex Corporation", "1-888-555-2323", 2 },
+                    { 3, "456 Elm St, Business City, NY 54321", new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1959), "contact@microsoft.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Microsoft", "1-888-555-2323", 3 },
+                    { 4, "456 Elm St, Business City, NY 54321", new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1960), "contact@uber.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Uber", "1-888-555-2323", 4 },
+                    { 5, "789 Tech St, Silicon Valley, CA 98765", new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1962), "support@initech.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Initech", "1-877-555-3434", 5 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "JobSeekers",
+                columns: new[] { "Id", "CreationDate", "Email", "IsFresh", "ModificationDate", "Name", "UserId", "YearsOfExperience" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(2000), "john.doe@example.com", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "John Doe", 6, 5 },
+                    { 2, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(2002), "jane.smith@example.com", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jane Smith", 7, 0 },
+                    { 3, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(2003), "bob.johnson@example.com", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Bob Johnson", 8, 7 },
+                    { 4, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(2004), "alice.williams@example.com", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Alice Williams", 9, 0 },
+                    { 5, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(2006), "random@example.com", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Random", 10, 0 }
                 });
 
             migrationBuilder.CreateIndex(

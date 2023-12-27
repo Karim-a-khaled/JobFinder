@@ -14,10 +14,5 @@ namespace JobFinder.Entities.Entities.UserManagement
         public JobSeeker JobSeeker { get; set; }
         public Company Company { get; set; }
         public virtual ICollection<UserRole> UserRoles { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
-        public DateTime TokenCreated { get; set; }
-        public DateTime TokenExpires { get; set; }
-
     }
 }
