@@ -37,21 +37,37 @@ namespace JobFinder.Service
             return job;
         }
 
-        public async Task<Job> AddJob(JobDto jobDto)
+        public async Task<string> AddOrUpdateJob(JobDto jobDto)
         {
+            var company = await _context.Companies.FindAsync(jobDto.CompanyId);
+            if (company is null)
+                return "Invalid Company";
             var job = await _context.Jobs.FirstOrDefaultAsync(j => j.Title == jobDto.Title
                         && j.Description == jobDto.Description);
 
             if (job is not null)
-                throw new Exception("job is already exist");
-
-            job = new Job
             {
-                Title = jobDto.Title,
-                Description = jobDto.Description,
+                job.Title = jobDto.Title;
+                job.Description = jobDto.Description;
+                job.CompanyId = company.Id;
+
+                _context.Jobs.Update(job);
+                await _context.SaveChangesAsync();
+                return "Updated Succesfully";
+            }
+            else
+            {
+                job = new Job
+                {
+                    Title = jobDto.Title,
+                    Description = jobDto.Description,
+                    CompanyId = jobDto.CompanyId
             };
 
-            return job;
+                await _context.Jobs.AddAsync(job);
+                await _context.SaveChangesAsync();
+                return "Added Succesfully";
+            }
         }
     }
 }

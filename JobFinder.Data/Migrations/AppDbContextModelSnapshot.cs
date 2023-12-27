@@ -103,7 +103,7 @@ namespace JobFinder.Data.Migrations
                         {
                             Id = 1,
                             Address = "123 Main St, Anytown, CA 12345",
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1957),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6466),
                             Email = "info@acme.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Acme Corporation",
@@ -114,7 +114,7 @@ namespace JobFinder.Data.Migrations
                         {
                             Id = 2,
                             Address = "456 Elm St, Business City, NY 54321",
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1958),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6468),
                             Email = "contact@globex.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Globex Corporation",
@@ -125,7 +125,7 @@ namespace JobFinder.Data.Migrations
                         {
                             Id = 3,
                             Address = "456 Elm St, Business City, NY 54321",
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1959),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6470),
                             Email = "contact@microsoft.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Microsoft",
@@ -136,7 +136,7 @@ namespace JobFinder.Data.Migrations
                         {
                             Id = 4,
                             Address = "456 Elm St, Business City, NY 54321",
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1960),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6471),
                             Email = "contact@uber.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Uber",
@@ -147,7 +147,7 @@ namespace JobFinder.Data.Migrations
                         {
                             Id = 5,
                             Address = "789 Tech St, Silicon Valley, CA 98765",
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1962),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6473),
                             Email = "support@initech.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Initech",
@@ -230,7 +230,7 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(2000),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6495),
                             Email = "john.doe@example.com",
                             IsFresh = false,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -241,7 +241,7 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 2,
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(2002),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6497),
                             Email = "jane.smith@example.com",
                             IsFresh = true,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -252,7 +252,7 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 3,
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(2003),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6498),
                             Email = "bob.johnson@example.com",
                             IsFresh = false,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -263,7 +263,7 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 4,
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(2004),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6499),
                             Email = "alice.williams@example.com",
                             IsFresh = true,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -274,7 +274,7 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 5,
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(2006),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6501),
                             Email = "random@example.com",
                             IsFresh = true,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -355,7 +355,7 @@ namespace JobFinder.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<bool>("isCompany")
+                    b.Property<bool>("IsCompany")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
@@ -369,7 +369,7 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1821),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6225),
                             Email = "info@acme.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Password = "password",
@@ -378,7 +378,7 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 2,
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1832),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6236),
                             Email = "contact@globex.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Password = "password",
@@ -387,7 +387,7 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 3,
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1833),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6237),
                             Email = "contact@microsoft.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Password = "password",
@@ -396,7 +396,7 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 4,
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1834),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6239),
                             Email = "contact@uber.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Password = "password",
@@ -405,7 +405,7 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 5,
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1835),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6240),
                             Email = "support@initech.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Password = "password",
@@ -414,7 +414,7 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 6,
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1836),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6241),
                             Email = "john.doe@example.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Password = "password",
@@ -423,7 +423,7 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 7,
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1837),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6242),
                             Email = "jane.smith@example.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Password = "password",
@@ -432,7 +432,7 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 8,
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1838),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6293),
                             Email = "bob.johnson@example.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Password = "password",
@@ -441,7 +441,7 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 9,
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1839),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6294),
                             Email = "alice.williams@example.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Password = "password",
@@ -450,7 +450,7 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 10,
-                            CreationDate = new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1839),
+                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6295),
                             Email = "random@example.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Password = "password",

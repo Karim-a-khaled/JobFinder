@@ -182,19 +182,19 @@ namespace JobFinder.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "CreationDate", "Email", "ModificationDate", "Password", "isCompany" },
+                columns: new[] { "Id", "CreationDate", "Email", "ModificationDate", "Password", "IsCompany" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1821), "info@acme.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", true },
-                    { 2, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1832), "contact@globex.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", true },
-                    { 3, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1833), "contact@microsoft.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", true },
-                    { 4, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1834), "contact@uber.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", true },
-                    { 5, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1835), "support@initech.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", true },
-                    { 6, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1836), "john.doe@example.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", false },
-                    { 7, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1837), "jane.smith@example.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", false },
-                    { 8, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1838), "bob.johnson@example.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", false },
-                    { 9, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1839), "alice.williams@example.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", false },
-                    { 10, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1839), "random@example.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", false }
+                    { 1, new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6225), "info@acme.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", true },
+                    { 2, new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6236), "contact@globex.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", true },
+                    { 3, new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6237), "contact@microsoft.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", true },
+                    { 4, new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6239), "contact@uber.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", true },
+                    { 5, new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6240), "support@initech.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", true },
+                    { 6, new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6241), "john.doe@example.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", false },
+                    { 7, new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6242), "jane.smith@example.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", false },
+                    { 8, new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6293), "bob.johnson@example.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", false },
+                    { 9, new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6294), "alice.williams@example.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", false },
+                    { 10, new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6295), "random@example.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "password", false }
                 });
 
             migrationBuilder.InsertData(
@@ -202,11 +202,11 @@ namespace JobFinder.Data.Migrations
                 columns: new[] { "Id", "Address", "CreationDate", "Email", "ModificationDate", "Name", "PhoneNumber", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "123 Main St, Anytown, CA 12345", new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1957), "info@acme.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Acme Corporation", "1-800-555-1212", 1 },
-                    { 2, "456 Elm St, Business City, NY 54321", new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1958), "contact@globex.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Globex Corporation", "1-888-555-2323", 2 },
-                    { 3, "456 Elm St, Business City, NY 54321", new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1959), "contact@microsoft.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Microsoft", "1-888-555-2323", 3 },
-                    { 4, "456 Elm St, Business City, NY 54321", new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1960), "contact@uber.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Uber", "1-888-555-2323", 4 },
-                    { 5, "789 Tech St, Silicon Valley, CA 98765", new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(1962), "support@initech.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Initech", "1-877-555-3434", 5 }
+                    { 1, "123 Main St, Anytown, CA 12345", new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6466), "info@acme.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Acme Corporation", "1-800-555-1212", 1 },
+                    { 2, "456 Elm St, Business City, NY 54321", new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6468), "contact@globex.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Globex Corporation", "1-888-555-2323", 2 },
+                    { 3, "456 Elm St, Business City, NY 54321", new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6470), "contact@microsoft.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Microsoft", "1-888-555-2323", 3 },
+                    { 4, "456 Elm St, Business City, NY 54321", new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6471), "contact@uber.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Uber", "1-888-555-2323", 4 },
+                    { 5, "789 Tech St, Silicon Valley, CA 98765", new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6473), "support@initech.com", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Initech", "1-877-555-3434", 5 }
                 });
 
             migrationBuilder.InsertData(
@@ -214,11 +214,11 @@ namespace JobFinder.Data.Migrations
                 columns: new[] { "Id", "CreationDate", "Email", "IsFresh", "ModificationDate", "Name", "UserId", "YearsOfExperience" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(2000), "john.doe@example.com", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "John Doe", 6, 5 },
-                    { 2, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(2002), "jane.smith@example.com", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jane Smith", 7, 0 },
-                    { 3, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(2003), "bob.johnson@example.com", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Bob Johnson", 8, 7 },
-                    { 4, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(2004), "alice.williams@example.com", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Alice Williams", 9, 0 },
-                    { 5, new DateTime(2023, 12, 27, 8, 47, 22, 770, DateTimeKind.Local).AddTicks(2006), "random@example.com", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Random", 10, 0 }
+                    { 1, new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6495), "john.doe@example.com", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "John Doe", 6, 5 },
+                    { 2, new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6497), "jane.smith@example.com", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jane Smith", 7, 0 },
+                    { 3, new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6498), "bob.johnson@example.com", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Bob Johnson", 8, 7 },
+                    { 4, new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6499), "alice.williams@example.com", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Alice Williams", 9, 0 },
+                    { 5, new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6501), "random@example.com", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Random", 10, 0 }
                 });
 
             migrationBuilder.CreateIndex(

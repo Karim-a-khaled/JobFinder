@@ -1,4 +1,5 @@
-﻿using JobFinder.Entities.Entities.UserManagement;
+﻿using JobFinder.Entities.Entities;
+using JobFinder.Entities.Entities.UserManagement;
 using JobFinder.Entities.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;

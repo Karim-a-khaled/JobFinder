@@ -1,5 +1,6 @@
 ﻿using JobFinder.Entities.Entities;
 using JobFinder.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace JobFinder.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CompanyController : ControllerBase
     {
         private readonly CompanyService _companyService;
@@ -17,7 +19,7 @@ namespace JobFinder.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Company>>> GetCompanies()
+        public async Task<ActionResult<IEnumerable<Company>>> GetCompanies()
         {
             var companies = await _companyService.GetCompanies();
             if (companies is null)

@@ -16,32 +16,27 @@ namespace JobFinder.Controllers
         {
             _accountService = accountService;
         }
-        [HttpPost("Register")]
-        [AllowAnonymous]
-        public async Task<bool> Register([FromBody] RegisterationDto userRegisterDto)
-        {
 
+        [HttpPost("Register")]
+        public async Task<string> Register(RegisterationDto userRegisterDto)
+        {
             var result = await _accountService.Register(userRegisterDto);
 
             if (result is null)
-                throw new Exception("Error");
+                return "This Email Is Taken";
 
-            return true;
+            return "Registered Succesfuly";
         }
 
         [HttpPost("Login")]
-        [AllowAnonymous]
-        public async Task<string> Login([FromBody] LoginDto loginDto)
+        public async Task<string> Login(LoginDto loginDto)
         {
-
             var result = await _accountService.Login(loginDto);
 
             if (result == null)
-            {
-                throw new Exception("Error");
-            }
-            return result;
+                return "Invalid Email Or Password";
 
+            return result;
         }
     }
 }

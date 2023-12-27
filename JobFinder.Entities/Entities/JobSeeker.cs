@@ -17,6 +17,8 @@ namespace JobFinder.Entities.Entities
         public int UserId { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<Application> Applications { get; set; }
+        public File File { get; set; }
+
 
     }
 }

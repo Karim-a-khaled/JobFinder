@@ -1,6 +1,7 @@
 ﻿using JobFinder.Entities.DTOs;
 using JobFinder.Entities.Entities;
 using JobFinder.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace JobFinder.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ApplicationController : ControllerBase
     {
         private readonly ApplicationService _applicationService;
@@ -18,7 +20,7 @@ namespace JobFinder.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Application>>> GetApplications()
+        public async Task<ActionResult<IEnumerable<Application>>> GetApplications()
         {
             var applications = await _applicationService.GetApplications();
             if (applications is null)
@@ -26,7 +28,6 @@ namespace JobFinder.Controllers
 
             return Ok(applications);
         }
-
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Application>> GetApplication(int id)

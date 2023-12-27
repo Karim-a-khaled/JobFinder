@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JobFinder.Data.Config
+namespace JobFinder.Data.Mapping
 {
-    public class RoleConfiguration
+    public class RoleMapping
     {
         // implemented in UserRole Configuration
     }

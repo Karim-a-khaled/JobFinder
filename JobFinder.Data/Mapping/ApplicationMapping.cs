@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JobFinder.Data.Config
+namespace JobFinder.Data.Mapping
 {
-    public class ApplicationConfiguration : IEntityTypeConfiguration<Application>
+    public class ApplicationMapping : IEntityTypeConfiguration<Application>
     {
         public void Configure(EntityTypeBuilder<Application> builder)
         {

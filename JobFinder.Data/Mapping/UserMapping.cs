@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using JobFinder.Entities.Entities;
 
-namespace JobFinder.Data.Config
+namespace JobFinder.Data.Mapping
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public class UserMapping : IEntityTypeConfiguration<User>
     {
 
 

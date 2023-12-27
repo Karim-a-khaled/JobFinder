@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JobFinder.Data.Config
+namespace JobFinder.Data.Mapping
 {
-    public class CompanyConfiguration : IEntityTypeConfiguration<Company>
+    public class CompanyMapping : IEntityTypeConfiguration<Company>
     {
         // implemented in Apllication Configuration
         public void Configure(EntityTypeBuilder<Company> builder)
