@@ -34,6 +34,9 @@ namespace JobFinder.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
@@ -48,6 +51,9 @@ namespace JobFinder.Data.Migrations
 
                     b.Property<DateTime>("ModificationDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -70,6 +76,9 @@ namespace JobFinder.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
@@ -79,6 +88,9 @@ namespace JobFinder.Data.Migrations
 
                     b.Property<DateTime>("ModificationDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -103,9 +115,11 @@ namespace JobFinder.Data.Migrations
                         {
                             Id = 1,
                             Address = "123 Main St, Anytown, CA 12345",
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6466),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(4970),
                             Email = "info@acme.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedBy = 0,
                             Name = "Acme Corporation",
                             PhoneNumber = "1-800-555-1212",
                             UserId = 1
@@ -114,9 +128,11 @@ namespace JobFinder.Data.Migrations
                         {
                             Id = 2,
                             Address = "456 Elm St, Business City, NY 54321",
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6468),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(4971),
                             Email = "contact@globex.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedBy = 0,
                             Name = "Globex Corporation",
                             PhoneNumber = "1-888-555-2323",
                             UserId = 2
@@ -125,9 +141,11 @@ namespace JobFinder.Data.Migrations
                         {
                             Id = 3,
                             Address = "456 Elm St, Business City, NY 54321",
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6470),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(4973),
                             Email = "contact@microsoft.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedBy = 0,
                             Name = "Microsoft",
                             PhoneNumber = "1-888-555-2323",
                             UserId = 3
@@ -136,9 +154,11 @@ namespace JobFinder.Data.Migrations
                         {
                             Id = 4,
                             Address = "456 Elm St, Business City, NY 54321",
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6471),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(4975),
                             Email = "contact@uber.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedBy = 0,
                             Name = "Uber",
                             PhoneNumber = "1-888-555-2323",
                             UserId = 4
@@ -147,13 +167,54 @@ namespace JobFinder.Data.Migrations
                         {
                             Id = 5,
                             Address = "789 Tech St, Silicon Valley, CA 98765",
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6473),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(4976),
                             Email = "support@initech.com",
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedBy = 0,
                             Name = "Initech",
                             PhoneNumber = "1-877-555-3434",
                             UserId = 5
                         });
+                });
+
+            modelBuilder.Entity("JobFinder.Entities.Entities.File", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("CvFile")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("JobSeekerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ModificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JobSeekerId")
+                        .IsUnique();
+
+                    b.ToTable("File");
                 });
 
             modelBuilder.Entity("JobFinder.Entities.Entities.Job", b =>
@@ -167,6 +228,9 @@ namespace JobFinder.Data.Migrations
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
@@ -176,6 +240,9 @@ namespace JobFinder.Data.Migrations
 
                     b.Property<DateTime>("ModificationDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -196,6 +263,9 @@ namespace JobFinder.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
@@ -208,6 +278,9 @@ namespace JobFinder.Data.Migrations
 
                     b.Property<DateTime>("ModificationDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -230,10 +303,12 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6495),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(5001),
                             Email = "john.doe@example.com",
                             IsFresh = false,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedBy = 0,
                             Name = "John Doe",
                             UserId = 6,
                             YearsOfExperience = 5
@@ -241,10 +316,12 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 2,
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6497),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(5003),
                             Email = "jane.smith@example.com",
                             IsFresh = true,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedBy = 0,
                             Name = "Jane Smith",
                             UserId = 7,
                             YearsOfExperience = 0
@@ -252,10 +329,12 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 3,
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6498),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(5004),
                             Email = "bob.johnson@example.com",
                             IsFresh = false,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedBy = 0,
                             Name = "Bob Johnson",
                             UserId = 8,
                             YearsOfExperience = 7
@@ -263,10 +342,12 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 4,
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6499),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(5005),
                             Email = "alice.williams@example.com",
                             IsFresh = true,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedBy = 0,
                             Name = "Alice Williams",
                             UserId = 9,
                             YearsOfExperience = 0
@@ -274,17 +355,19 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 5,
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6501),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(5007),
                             Email = "random@example.com",
                             IsFresh = true,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedBy = 0,
                             Name = "Random",
                             UserId = 10,
                             YearsOfExperience = 0
                         });
                 });
 
-            modelBuilder.Entity("JobFinder.Entities.Entities.UserManagement.Role", b =>
+            modelBuilder.Entity("JobFinder.Entities.Entities.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -292,21 +375,21 @@ namespace JobFinder.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("ModificationDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ModifiedBy")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RoleType")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Timer")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -316,18 +399,20 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 1,
+                            CreatedBy = 0,
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModificationDate = new DateTime(2023, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
-                            Name = "JobSeeker",
-                            RoleType = 0
+                            ModificationDate = new DateTime(2023, 12, 28, 0, 0, 0, 0, DateTimeKind.Local),
+                            ModifiedBy = 0,
+                            Name = "JobSeeker"
                         },
                         new
                         {
                             Id = 2,
+                            CreatedBy = 0,
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModificationDate = new DateTime(2023, 12, 27, 0, 0, 0, 0, DateTimeKind.Local),
-                            Name = "Employer",
-                            RoleType = 0
+                            ModificationDate = new DateTime(2023, 12, 28, 0, 0, 0, 0, DateTimeKind.Local),
+                            ModifiedBy = 0,
+                            Name = "Employer"
                         });
                 });
 
@@ -339,6 +424,9 @@ namespace JobFinder.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
@@ -347,16 +435,19 @@ namespace JobFinder.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<bool>("IsCompany")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("ModificationDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
-
-                    b.Property<bool>("IsCompany")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -369,92 +460,112 @@ namespace JobFinder.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6225),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(4775),
                             Email = "info@acme.com",
+                            IsCompany = true,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Password = "password",
-                            isCompany = true
+                            ModifiedBy = 0,
+                            Password = "password"
                         },
                         new
                         {
                             Id = 2,
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6236),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(4786),
                             Email = "contact@globex.com",
+                            IsCompany = true,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Password = "password",
-                            isCompany = true
+                            ModifiedBy = 0,
+                            Password = "password"
                         },
                         new
                         {
                             Id = 3,
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6237),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(4788),
                             Email = "contact@microsoft.com",
+                            IsCompany = true,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Password = "password",
-                            isCompany = true
+                            ModifiedBy = 0,
+                            Password = "password"
                         },
                         new
                         {
                             Id = 4,
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6239),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(4789),
                             Email = "contact@uber.com",
+                            IsCompany = true,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Password = "password",
-                            isCompany = true
+                            ModifiedBy = 0,
+                            Password = "password"
                         },
                         new
                         {
                             Id = 5,
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6240),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(4790),
                             Email = "support@initech.com",
+                            IsCompany = true,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Password = "password",
-                            isCompany = true
+                            ModifiedBy = 0,
+                            Password = "password"
                         },
                         new
                         {
                             Id = 6,
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6241),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(4791),
                             Email = "john.doe@example.com",
+                            IsCompany = false,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Password = "password",
-                            isCompany = false
+                            ModifiedBy = 0,
+                            Password = "password"
                         },
                         new
                         {
                             Id = 7,
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6242),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(4793),
                             Email = "jane.smith@example.com",
+                            IsCompany = false,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Password = "password",
-                            isCompany = false
+                            ModifiedBy = 0,
+                            Password = "password"
                         },
                         new
                         {
                             Id = 8,
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6293),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(4794),
                             Email = "bob.johnson@example.com",
+                            IsCompany = false,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Password = "password",
-                            isCompany = false
+                            ModifiedBy = 0,
+                            Password = "password"
                         },
                         new
                         {
                             Id = 9,
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6294),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(4795),
                             Email = "alice.williams@example.com",
+                            IsCompany = false,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Password = "password",
-                            isCompany = false
+                            ModifiedBy = 0,
+                            Password = "password"
                         },
                         new
                         {
                             Id = 10,
-                            CreationDate = new DateTime(2023, 12, 27, 10, 17, 2, 274, DateTimeKind.Local).AddTicks(6295),
+                            CreatedBy = 0,
+                            CreationDate = new DateTime(2023, 12, 28, 11, 8, 3, 806, DateTimeKind.Local).AddTicks(4796),
                             Email = "random@example.com",
+                            IsCompany = false,
                             ModificationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Password = "password",
-                            isCompany = false
+                            ModifiedBy = 0,
+                            Password = "password"
                         });
                 });
 
@@ -466,11 +577,17 @@ namespace JobFinder.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("ModificationDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("ModifiedBy")
+                        .HasColumnType("int");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
@@ -517,6 +634,17 @@ namespace JobFinder.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("JobFinder.Entities.Entities.File", b =>
+                {
+                    b.HasOne("JobFinder.Entities.Entities.JobSeeker", "JobSeeker")
+                        .WithOne("File")
+                        .HasForeignKey("JobFinder.Entities.Entities.File", "JobSeekerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("JobSeeker");
+                });
+
             modelBuilder.Entity("JobFinder.Entities.Entities.Job", b =>
                 {
                     b.HasOne("JobFinder.Entities.Entities.Company", "Company")
@@ -541,7 +669,7 @@ namespace JobFinder.Data.Migrations
 
             modelBuilder.Entity("JobFinder.Entities.Entities.UserManagement.UserRole", b =>
                 {
-                    b.HasOne("JobFinder.Entities.Entities.UserManagement.Role", "Role")
+                    b.HasOne("JobFinder.Entities.Entities.Role", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -571,9 +699,12 @@ namespace JobFinder.Data.Migrations
             modelBuilder.Entity("JobFinder.Entities.Entities.JobSeeker", b =>
                 {
                     b.Navigation("Applications");
+
+                    b.Navigation("File")
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("JobFinder.Entities.Entities.UserManagement.Role", b =>
+            modelBuilder.Entity("JobFinder.Entities.Entities.Role", b =>
                 {
                     b.Navigation("UserRoles");
                 });

@@ -14,8 +14,6 @@ namespace JobFinder.Data.Mapping
 {
     public class UserMapping : IEntityTypeConfiguration<User>
     {
-
-
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.Property(b => b.Email).HasMaxLength(200).IsRequired();
@@ -33,8 +31,6 @@ namespace JobFinder.Data.Mapping
                 .WithOne(js => js.User)
                 .HasForeignKey<Company>(c => c.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
-
-
         }
     }
 }

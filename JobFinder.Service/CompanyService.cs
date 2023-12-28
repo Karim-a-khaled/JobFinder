@@ -1,11 +1,6 @@
 ﻿using JobFinder.Data;
 using JobFinder.Entities.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JobFinder.Service
 {
@@ -36,5 +31,15 @@ namespace JobFinder.Service
             return company;
         }
 
+        public async Task<string> DeleteCompany(int id)
+        {
+            var company = _context.Companies.FirstOrDefault(a => a.Id == id);
+            if (company is null)
+                return null;
+
+            _context.Companies.Remove(company);
+            await _context.SaveChangesAsync();
+            return "Deleted Succesfuly";
+        }
     }
 }

@@ -50,5 +50,15 @@ namespace JobFinder.Controllers
 
             return Ok(applicationToAdd);
         }
+
+        [HttpDelete]
+        public async Task<ActionResult<string>> DeleteApplication (int id)
+        {
+            var application = _applicationService.DeleteApplication(id);
+            if (application is null)
+                return NotFound("Application Was Not Found");
+
+            return Ok(application);
+        }
     }
 }

@@ -12,11 +12,11 @@ namespace JobFinder.Controllers
     public class CompanyController : ControllerBase
     {
         private readonly CompanyService _companyService;
-
         public CompanyController(CompanyService companyService)
         {
             _companyService = companyService;
         }
+
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Company>>> GetCompanies()
@@ -34,6 +34,16 @@ namespace JobFinder.Controllers
             var company = await _companyService.GetCompany(id);
             if (company is null)
                 return NotFound("Company Not Found");
+
+            return Ok(company);
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<string>> DeleteCompany(int id)
+        {
+            var company = _companyService.DeleteCompany(id);
+            if (company is null)
+                return NotFound("C ompany Was Not Found");
 
             return Ok(company);
         }

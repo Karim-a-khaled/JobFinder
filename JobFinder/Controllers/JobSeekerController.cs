@@ -39,5 +39,17 @@ namespace JobFinder.Controllers
 
             return Ok(jobSeeker);
         }
+
+        [HttpDelete]
+        public async Task<ActionResult<string>> DeleteJobSeeker(int id)
+        {
+            var jobSeeker = _jobSeekerService.DeleteJobSeeker(id);
+            if (jobSeeker is null)
+                return NotFound("JobSeeker Was Not Found");
+
+            return Ok(jobSeeker);
+        }
     }
+
+
 }

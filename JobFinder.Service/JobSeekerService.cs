@@ -1,11 +1,6 @@
 ﻿using JobFinder.Data;
 using JobFinder.Entities.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JobFinder.Service
 {
@@ -34,6 +29,17 @@ namespace JobFinder.Service
                 return null;
 
             return jobSeeker;
+        }
+
+        public async Task<string> DeleteJobSeeker(int id)
+        {
+            var jobSeeker = _context.JobSeekers.FirstOrDefault(a => a.Id == id);
+            if (jobSeeker is null)
+                return null;
+
+            _context.JobSeekers.Remove(jobSeeker);
+            await _context.SaveChangesAsync();
+            return "Deleted Succesfuly";
         }
     }
 }

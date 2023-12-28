@@ -41,7 +41,7 @@ namespace JobFinder.Controllers
             return Ok(job);
         }
 
-        [HttpPost()]
+        [HttpPost]
         public async Task<ActionResult<string>> AddOrUpdateJob([FromBody] JobDto jobDto)
         {
             var result = await _jobService.AddOrUpdateJob(jobDto);
@@ -50,6 +50,16 @@ namespace JobFinder.Controllers
                 return NotFound(result);
 
             return Ok(result);
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<string>> DeleteJob(int id)
+        {
+            var job = _jobService.DeleteJob(id);
+            if (job is null)
+                return NotFound("Job Was Not Found");
+
+            return Ok(job);
         }
     }
 }
