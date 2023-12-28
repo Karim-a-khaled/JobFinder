@@ -13,7 +13,7 @@ namespace JobFinder.Service
             _context = context;
         }
 
-        public async Task<List<Job>> GetJobs()
+        public async Task<IEnumerable<Job>> GetJobs()
         {
             var jobs = await _context.Jobs.ToListAsync();
             if (jobs is null)

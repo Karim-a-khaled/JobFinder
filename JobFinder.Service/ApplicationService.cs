@@ -14,7 +14,7 @@ namespace JobFinder.Service
             _context = context;
         }
 
-        public async Task<List<Application>> GetApplications()
+        public async Task<IEnumerable<Application>> GetApplications()
         {
             var applications = await _context.Applications.ToListAsync();
             return applications;
