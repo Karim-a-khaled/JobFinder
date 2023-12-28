@@ -36,15 +36,16 @@ namespace JobFinder.Service
         {
             var company = await _context.Companies.FindAsync(jobDto.CompanyId);
             if (company is null)
-                return "Invalid Company";
-            var job = await _context.Jobs.FirstOrDefaultAsync(j => j.Title == jobDto.Title
-                        && j.Description == jobDto.Description);
+                return null;
+
+            var job = await _context.Jobs.FirstOrDefaultAsync(j => j.Title == jobDto.Title && j.Description == jobDto.Description);
 
             if (job is not null)
             {
                 job.Title = jobDto.Title;
                 job.Description = jobDto.Description;
                 job.CompanyId = company.Id;
+                job.ModificationDate = DateTime.Now.Date;
 
                 _context.Jobs.Update(job);
                 await _context.SaveChangesAsync();
@@ -56,11 +57,14 @@ namespace JobFinder.Service
                 {
                     Title = jobDto.Title,
                     Description = jobDto.Description,
-                    CompanyId = jobDto.CompanyId
-            };
+                    CompanyId = jobDto.CompanyId,
+                    CreationDate = DateTime.Now.Date,
+                    
+                };
 
                 await _context.Jobs.AddAsync(job);
                 await _context.SaveChangesAsync();
+
                 return "Added Succesfully";
             }
         }

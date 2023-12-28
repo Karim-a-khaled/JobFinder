@@ -19,7 +19,7 @@ namespace JobFinder.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Job>>> GetApplications()
+        public async Task<ActionResult<IEnumerable<Job>>> GetJob()
         {
             var jobs = await _jobService.GetJobs();
             
@@ -30,7 +30,7 @@ namespace JobFinder.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Application>> GetApplication(int id)
+        public async Task<ActionResult<Job>> GetJob(int id)
         {
             // Retrieve the application with the specified ID
             var job = await _jobService.GetJob(id);
@@ -46,8 +46,8 @@ namespace JobFinder.Controllers
         {
             var result = await _jobService.AddOrUpdateJob(jobDto);
 
-            if (result == "Company Was Not Found")
-                return NotFound(result);
+            if (result is null)
+                return NotFound("Invalid Company");
 
             return Ok(result);
         }

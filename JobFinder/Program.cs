@@ -18,6 +18,7 @@ builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<ApplicationService>();
 builder.Services.AddScoped<JobSeekerService>();
 builder.Services.AddScoped<CompanyService>();
+builder.Services.AddScoped<JobService>();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();

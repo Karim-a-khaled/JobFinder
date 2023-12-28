@@ -44,7 +44,7 @@ namespace JobFinder.Service
             {
                 IsSubmitted = applicationDto.IsSubmitted,
                 CoverLetter = applicationDto.CoverLetter,
-                CreationDate = DateTime.Now,
+                CreationDate = DateTime.Now.Date
             };
 
 
