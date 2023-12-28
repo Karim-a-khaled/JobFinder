@@ -7,7 +7,6 @@ namespace JobFinder.Service
     public class CompanyService
     {
         private readonly AppDbContext _context;
-
         public CompanyService(AppDbContext context)
         {
             _context = context;

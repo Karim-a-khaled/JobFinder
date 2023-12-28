@@ -9,7 +9,6 @@ namespace JobFinder.Service
     public class ApplicationService
     {
         private readonly AppDbContext _context;
-
         public ApplicationService(AppDbContext context)
         {
             _context = context;
@@ -46,7 +45,6 @@ namespace JobFinder.Service
                 CoverLetter = applicationDto.CoverLetter,
                 CreationDate = DateTime.Now.Date
             };
-
 
             await _context.AddAsync(applicationToAdd);
             await _context.SaveChangesAsync();
