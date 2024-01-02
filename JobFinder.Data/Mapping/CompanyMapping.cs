@@ -6,11 +6,15 @@ namespace JobFinder.Data.Mapping
 {
     public class CompanyMapping : IEntityTypeConfiguration<Company>
     {
-        // implemented in Apllication Configuration
         public void Configure(EntityTypeBuilder<Company> builder)
         {
             // implemented in Job Configuration
             // implemented in User Configuration
+
+            builder.HasOne(c => c.CompanyProfilePhoto)
+                   .WithOne()
+                   .HasForeignKey<Company>(c => c.CompanyProfilePhotoId)
+                   .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -2,10 +2,7 @@
 {
     public class File : BaseEntity
     {
-        public string FileName { get; set; }
-        public byte[] CvFile { get; set; }
-
-        public int JobSeekerId { get; set; } 
-        public JobSeeker JobSeeker { get; set; }
+        public string Name { get; set; }
+        public string Path { get; set; }
     }
 }

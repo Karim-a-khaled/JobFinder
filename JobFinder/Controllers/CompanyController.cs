@@ -1,8 +1,10 @@
-﻿using JobFinder.Entities.Entities;
+﻿using JobFinder.Entities.DTOs;
+using JobFinder.Entities.Entities;
 using JobFinder.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace JobFinder.Controllers
 {
@@ -47,5 +49,19 @@ namespace JobFinder.Controllers
 
             return Ok(company);
         }
+
+
+
+        [HttpPut()]
+        public async Task<ActionResult<string>> UpdateCompany(UpdateCompanyDto request)
+        {
+            var company = await _companyService.UpdateCompany(request);
+            if (company is null)
+                return NotFound("Company Was Not Found");
+
+            
+            return Ok("Updated Succesfully");
+        }
+
     }
 }

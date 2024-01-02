@@ -13,9 +13,14 @@ namespace JobFinder.Data.Mapping
             // implemented in Application Configuration
             // implemented in User Configuration
 
-            builder.HasOne(js => js.File)
-                .WithOne(f => f.JobSeeker)
-                .HasForeignKey<Entities.Entities.File>(f => f.JobSeekerId)
+            builder.HasOne(js => js.JobSeekerCv)
+                .WithOne()
+                .HasForeignKey<JobSeeker>(js => js.JobSeekerCvId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(js => js.JobSeekerProfilePhoto)
+                .WithOne()
+                .HasForeignKey<JobSeeker>(js => js.JobSeekerProfilePhotoId)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }

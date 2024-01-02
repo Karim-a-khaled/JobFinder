@@ -4,6 +4,7 @@ using JobFinder.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobFinder.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231231181022_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,6 +34,7 @@ namespace JobFinder.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CoverLetter")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CreatedById")
@@ -72,9 +76,10 @@ namespace JobFinder.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CompanyProfilePhotoId")
+                    b.Property<int>("CompanyProfilePhotoId")
                         .HasColumnType("int");
 
                     b.Property<int>("CreatedById")
@@ -83,6 +88,10 @@ namespace JobFinder.Data.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("ModificationDate")
                         .HasColumnType("datetime2");
 
@@ -90,9 +99,11 @@ namespace JobFinder.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
@@ -101,8 +112,7 @@ namespace JobFinder.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyProfilePhotoId")
-                        .IsUnique()
-                        .HasFilter("[CompanyProfilePhotoId] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -131,9 +141,11 @@ namespace JobFinder.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Path")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -159,6 +171,7 @@ namespace JobFinder.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModificationDate")
@@ -168,6 +181,7 @@ namespace JobFinder.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -192,15 +206,16 @@ namespace JobFinder.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsFresh")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("JobSeekerCvId")
+                    b.Property<int>("JobSeekerCvId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("JobSeekerProfilePhotoId")
+                    b.Property<int>("JobSeekerProfilePhotoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ModificationDate")
@@ -210,6 +225,7 @@ namespace JobFinder.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
@@ -221,12 +237,10 @@ namespace JobFinder.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("JobSeekerCvId")
-                        .IsUnique()
-                        .HasFilter("[JobSeekerCvId] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("JobSeekerProfilePhotoId")
-                        .IsUnique()
-                        .HasFilter("[JobSeekerProfilePhotoId] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -255,6 +269,7 @@ namespace JobFinder.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -382,7 +397,8 @@ namespace JobFinder.Data.Migrations
                     b.HasOne("JobFinder.Entities.Entities.File", "CompanyProfilePhoto")
                         .WithOne()
                         .HasForeignKey("JobFinder.Entities.Entities.Company", "CompanyProfilePhotoId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("JobFinder.Entities.Entities.UserManagement.User", "User")
                         .WithOne("Company")
@@ -411,12 +427,14 @@ namespace JobFinder.Data.Migrations
                     b.HasOne("JobFinder.Entities.Entities.File", "JobSeekerCv")
                         .WithOne()
                         .HasForeignKey("JobFinder.Entities.Entities.JobSeeker", "JobSeekerCvId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("JobFinder.Entities.Entities.File", "JobSeekerProfilePhoto")
                         .WithOne()
                         .HasForeignKey("JobFinder.Entities.Entities.JobSeeker", "JobSeekerProfilePhotoId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("JobFinder.Entities.Entities.UserManagement.User", "User")
                         .WithOne("JobSeeker")
@@ -472,9 +490,11 @@ namespace JobFinder.Data.Migrations
 
             modelBuilder.Entity("JobFinder.Entities.Entities.UserManagement.User", b =>
                 {
-                    b.Navigation("Company");
+                    b.Navigation("Company")
+                        .IsRequired();
 
-                    b.Navigation("JobSeeker");
+                    b.Navigation("JobSeeker")
+                        .IsRequired();
 
                     b.Navigation("UserRoles");
                 });

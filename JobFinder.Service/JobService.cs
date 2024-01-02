@@ -58,7 +58,6 @@ namespace JobFinder.Service
                     Description = jobDto.Description,
                     CompanyId = jobDto.CompanyId,
                     CreationDate = DateTime.Now.Date,
-                    
                 };
 
                 await _context.Jobs.AddAsync(job);

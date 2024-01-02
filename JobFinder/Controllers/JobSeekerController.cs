@@ -1,4 +1,5 @@
-﻿using JobFinder.Entities.Entities;
+﻿using JobFinder.Entities.DTOs;
+using JobFinder.Entities.Entities;
 using JobFinder.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -48,6 +49,18 @@ namespace JobFinder.Controllers
                 return NotFound("JobSeeker Was Not Found");
 
             return Ok(jobSeeker);
+        }
+
+
+
+        [HttpPut()]
+        public async Task<ActionResult<string>> UpdateJobSeeker(UpdateJobSeekerDto request)
+        {
+            var jobSeeker = await _jobSeekerService.UpdateJobSeeker(request);
+            if (jobSeeker is null)
+                return NotFound("JobSeeker Was Not Found");
+
+            return Ok("Updated Succesfully");
         }
     }
 

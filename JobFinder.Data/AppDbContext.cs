@@ -16,14 +16,12 @@ namespace JobFinder.Data
         public DbSet<JobSeeker> JobSeekers { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Job> Jobs { get; set; }
+        public DbSet<Entities.Entities.File> Files{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.UserSeed();
             modelBuilder.RolesSeedData();
-            modelBuilder.CompanySeed();
-            modelBuilder.JobSeekerSeed();
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
         }

@@ -1,6 +1,9 @@
 ﻿using JobFinder.Data;
+using JobFinder.Entities.DTOs;
 using JobFinder.Entities.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using File = JobFinder.Entities.Entities.File;
 
 namespace JobFinder.Service
 {
@@ -39,6 +42,34 @@ namespace JobFinder.Service
             _context.Companies.Remove(company);
             await _context.SaveChangesAsync();
             return "Deleted Succesfuly";
+        }
+
+        public async Task<string> UpdateCompany(UpdateCompanyDto request)
+        {
+            var company = _context.Companies.FirstOrDefault(a => a.UserId == request.UserId);
+            if (company is null)
+                return null;
+
+            company.PhoneNumber = request.PhoneNumber;
+            company.Address = request.Address;
+            company.Name = request.Name;
+            company.PhoneNumber = request.PhoneNumber;
+            company.CreationDate = DateTime.Now;
+
+            var file = new File
+            {
+                Name = request.CompanyProfilePhoto.FileName,
+                // Path
+                CreationDate = DateTime.Now,
+            };
+            await _context.Files.AddAsync(file);
+            await _context.SaveChangesAsync();
+
+            company.CompanyProfilePhotoId = file.Id;
+            
+            _context.Companies.Update(company);
+            await _context.SaveChangesAsync();
+            return "Updated Succesfuly";
         }
     }
 }

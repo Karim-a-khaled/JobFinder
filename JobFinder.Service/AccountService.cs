@@ -43,6 +43,12 @@ namespace JobFinder.Service
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
 
+            var profile = new UserFactory().DeterminUser(request.isCompany);
+            profile.UserId = user.Id;
+
+            await _context.AddAsync(profile);
+            await _context.SaveChangesAsync();
+
             return user;
         }
 
