@@ -52,6 +52,7 @@ namespace JobFinder.Controllers
             return Ok(result);
         }
 
+
         [HttpDelete]
         public async Task<ActionResult<string>> DeleteJob(int id)
         {

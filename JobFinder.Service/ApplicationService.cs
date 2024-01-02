@@ -31,8 +31,7 @@ namespace JobFinder.Service
 
         public async Task<Application> AddApplication(ApplicationDto applicationDto)
         {
-            var existingApplication = await _context.Applications
-                .FindAsync();
+            var existingApplication = await _context.Applications.FindAsync();
 
             if (existingApplication != null)
             {

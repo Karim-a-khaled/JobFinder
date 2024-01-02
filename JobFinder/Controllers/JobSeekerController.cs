@@ -13,7 +13,6 @@ namespace JobFinder.Controllers
     public class JobSeekerController : ControllerBase
     {
         private readonly JobSeekerService _jobSeekerService;
-
         public JobSeekerController(JobSeekerService jobSeekerService)
         {
             _jobSeekerService = jobSeekerService;
@@ -50,8 +49,6 @@ namespace JobFinder.Controllers
 
             return Ok(jobSeeker);
         }
-
-
 
         [HttpPut()]
         public async Task<ActionResult<string>> UpdateJobSeeker(UpdateJobSeekerDto request)

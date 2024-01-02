@@ -267,7 +267,7 @@ namespace JobFinder.Data.Migrations
                             Id = 1,
                             CreatedById = 0,
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModificationDate = new DateTime(2023, 12, 31, 0, 0, 0, 0, DateTimeKind.Local),
+                            ModificationDate = new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Local),
                             ModifiedById = 0,
                             Name = "JobSeeker"
                         },
@@ -276,7 +276,7 @@ namespace JobFinder.Data.Migrations
                             Id = 2,
                             CreatedById = 0,
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModificationDate = new DateTime(2023, 12, 31, 0, 0, 0, 0, DateTimeKind.Local),
+                            ModificationDate = new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Local),
                             ModifiedById = 0,
                             Name = "Employer"
                         });

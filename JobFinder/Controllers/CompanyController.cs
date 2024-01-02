@@ -50,8 +50,6 @@ namespace JobFinder.Controllers
             return Ok(company);
         }
 
-
-
         [HttpPut()]
         public async Task<ActionResult<string>> UpdateCompany(UpdateCompanyDto request)
         {

@@ -21,20 +21,15 @@ namespace JobFinder.Service
             _context = context;
         }
 
-
         public async Task<User> Register(RegisterationDto request)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
             if (user != null)
                 return null;
 
-            //byte[] passwordHash;
-            //CreatePasswordHash(request.Password, out passwordHash);
-
             user = new User
             {
                 Email = request.Email,
-                //Password = Convert.ToBase64String(passwordHash), 
                 IsCompany = request.isCompany,
                 Password = request.Password, 
                 CreationDate = DateTime.Now
@@ -58,10 +53,6 @@ namespace JobFinder.Service
             if (user is null)
                 return null;
 
-            //byte[] storedPasswordHash = Convert.FromBase64String(user.Password); 
-            //if (!VerifyPasswordHash(request.Password, storedPasswordHash))
-            //    return null;
-
             if (user.Password != request.Password)
                 return null;
 
@@ -75,7 +66,7 @@ namespace JobFinder.Service
             {
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Role, user.IsCompany? "JobSeeker" : "Company")
+                new Claim(ClaimTypes.Role, user.IsCompany? "Company" : "JobSeeker")
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
@@ -92,19 +83,5 @@ namespace JobFinder.Service
 
             return jwt;
         }
-        
-        /*public void CreatePasswordHash(string password, out byte[] passwordHash)
-        //{
-        //    using (var hmac = new HMACSHA512(Encoding.UTF8.GetBytes(password)))
-        //    {
-        //        passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-        //    }
-        //}
-        //public bool VerifyPasswordHash(string password, byte[] passwordHash)
-        //{
-        //    var hash = Encoding.UTF8.GetString(passwordHash);
-        //    return BCrypt.Net.BCrypt.Verify(password, hash);
-        //}
-        */
     }
 }
