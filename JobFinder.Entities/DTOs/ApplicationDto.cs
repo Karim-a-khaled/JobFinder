@@ -1,8 +1,11 @@
-﻿namespace JobFinder.Entities.DTOs
+﻿using Microsoft.AspNetCore.Http;
+
+namespace JobFinder.Entities.DTOs
 {
     public class ApplicationDto
     {
-        public string CoverLetter { get; set; }
-        public bool IsSubmitted { get; set; }
+        public int? Id { get; set; }
+        public int JobId { get; set; }
+        public IFormFile File { get; set; }
     }
 }
