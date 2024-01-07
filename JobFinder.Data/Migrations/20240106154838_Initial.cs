@@ -266,9 +266,9 @@ namespace JobFinder.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_JobSeekers_JobSeekerProfilePhotoId",
                 table: "JobSeekers",
-                column: "JobSeekerProfilePhotoId",
+                column: "JobSeekerProfilePictureId",
                 unique: true,
-                filter: "[JobSeekerProfilePhotoId] IS NOT NULL");
+                filter: "[JobSeekerProfilePictureId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_JobSeekers_UserId",

@@ -2,7 +2,6 @@
 {
     public class Application : BaseEntity
     {
-        public bool IsSubmitted { get; set; }
         public string CoverLetter { get; set; }
         
         public int JobSeekerId { get; set; }

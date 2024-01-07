@@ -2,6 +2,7 @@
 using JobFinder.Entities.DTOs.JobSeekerDTOs;
 using JobFinder.Entities.Entities;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace JobFinder.Service
 {
@@ -45,62 +46,67 @@ namespace JobFinder.Service
         public async Task<string> UpdateJobSeeker(UpdateJobSeekerDto request)
         {
             var jobSeeker = _context.JobSeekers.FirstOrDefault(a => a.Id == request.Id);
-            
+
             if (jobSeeker is null)
                 return null;
-            
+
             jobSeeker.Name = request.Name;
             jobSeeker.YearsOfExperience = request.YearsOfExperience;
             jobSeeker.IsFresh = request.IsFresh;
             jobSeeker.CreationDate = DateTime.Now;
 
-            if (jobSeeker.JobSeekerProfilePhotoId is null)
+            if (jobSeeker.JobSeekerProfilePictureId is null)
             {
                 var file = new Entities.Entities.File
                 {
                     Name = request.JobSeekerProfilePicture.FileName,
                     CreationDate = DateTime.Now,
-
+                    Path = $"jobSeeker-{jobSeeker.Id}/profilePicture/{jobSeeker.JobSeekerProfilePicture.Id}-{jobSeeker.JobSeekerProfilePicture.Name}",
+                    ContentType = request.JobSeekerProfilePicture.ContentType
                 };
                 await _context.Files.AddAsync(file);
-                jobSeeker.JobSeekerProfilePhotoId = file.Id;
             }
+
             else
             {
-                var file = await _context.Files.FirstOrDefaultAsync(f => f.Id == jobSeeker.JobSeekerProfilePhotoId);
+                var file = await _context.Files.FirstOrDefaultAsync(f => f.Id == jobSeeker.JobSeekerProfilePictureId);
                 file.Name = request.JobSeekerProfilePicture.FileName;
-                //file.Path = 
-                
+                file.Path = $"jobSeeker-{jobSeeker.Id}/profilePicture/{jobSeeker.JobSeekerProfilePicture.Id}-{jobSeeker.JobSeekerProfilePicture.Name}",
+                file.ContentType = request.JobSeekerProfilePicture.ContentType;
+
                 _context.Files.Update(file);
-                jobSeeker.JobSeekerProfilePhotoId = file.Id;
             }
 
             if (jobSeeker.JobSeekerCvId is null)
             {
                 var file = new Entities.Entities.File
                 {
-                    Name = request.CvFile.FileName,
-                    //Path = 
+                    Name = request.JobSeekerCv.FileName,
+                    Path = $"jobSeeker-{jobSeeker.Id}/Cv/{jobSeeker.JobSeekerCv.Id}-{jobSeeker.JobSeekerCv.Name}",
                     CreationDate = DateTime.Now,
+                    ContentType = request.JobSeekerCv.ContentType
                 };
                 await _context.Files.AddAsync(file);
-                jobSeeker.JobSeekerCvId = file.Id;
             }
             else
             {
-                
+
                 var file = await _context.Files.FirstOrDefaultAsync(f => f.Id == jobSeeker.JobSeekerCvId);
-                file.Name = request.CvFile.FileName;
-                //file.Path = 
 
+                file.Name = request.JobSeekerCv.FileName;
+                file.Path = $"jobSeeker-{jobSeeker.Id}/Cv/{jobSeeker.JobSeekerCv.Id}-{jobSeeker.JobSeekerCv.Name}";
+                file.ModificationDate = DateTime.Now;
+                file.ContentType = request.JobSeekerCv.ContentType;
+                
                 _context.Files.Update(file);
-                jobSeeker.JobSeekerCvId = file.Id;
-
             }
-            await _context.SaveChangesAsync();
-            _context.JobSeekers.Update(jobSeeker);
+
             await _context.SaveChangesAsync();
             return "Updated Succesfuly";
         }
     }
 }
+
+
+
+

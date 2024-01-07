@@ -9,6 +9,6 @@ namespace JobFinder.Entities.DTOs.JobSeekerDTOs
         public bool IsFresh { get; set; }
         public int YearsOfExperience { get; set; }
         public IFormFile JobSeekerProfilePicture { get; set; }
-        public IFormFile CvFile { get; set; }
+        public IFormFile JobSeekerCv { get; set; }
     }
 }

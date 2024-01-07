@@ -10,7 +10,7 @@ namespace JobFinder.Entities.DTOs.CompanyDTOs
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public int UserId { get; set; }
-        public int? CompanyProfilePhotoId { get; set; }
-        public IFormFile CompanyProfilePhoto { get; set; }
+        public int? CompanyProfilePictureId { get; set; }
+        public IFormFile CompanyProfilePicture { get; set; }
     }
 }

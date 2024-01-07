@@ -13,6 +13,6 @@ namespace JobFinder.Entities.DTOs.AccountDTOs
         public string Password { get; set; }
 
         [Required(ErrorMessage = "FIELD_IS_REQUIRED")]
-        public bool isCompany { get; set; }
+        public bool IsCompany { get; set; }
     }
 }

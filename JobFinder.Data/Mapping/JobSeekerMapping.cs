@@ -18,9 +18,9 @@ namespace JobFinder.Data.Mapping
                    .HasForeignKey<JobSeeker>(js => js.JobSeekerCvId)
                    .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(js => js.JobSeekerProfilePhoto)
+            builder.HasOne(js => js.JobSeekerProfilePicture)
                    .WithOne()
-                   .HasForeignKey<JobSeeker>(js => js.JobSeekerProfilePhotoId)
+                   .HasForeignKey<JobSeeker>(js => js.JobSeekerProfilePictureId)
                    .OnDelete(DeleteBehavior.NoAction);
         }
     }

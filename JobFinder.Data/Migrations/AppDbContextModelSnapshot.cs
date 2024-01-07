@@ -203,7 +203,7 @@ namespace JobFinder.Data.Migrations
                     b.Property<int?>("JobSeekerCvId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("JobSeekerProfilePhotoId")
+                    b.Property<int?>("JobSeekerProfilePictureId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ModificationDate")
@@ -227,9 +227,9 @@ namespace JobFinder.Data.Migrations
                         .IsUnique()
                         .HasFilter("[JobSeekerCvId] IS NOT NULL");
 
-                    b.HasIndex("JobSeekerProfilePhotoId")
+                    b.HasIndex("JobSeekerProfilePictureId")
                         .IsUnique()
-                        .HasFilter("[JobSeekerProfilePhotoId] IS NOT NULL");
+                        .HasFilter("[JobSeekerProfilePictureId] IS NOT NULL");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -416,9 +416,9 @@ namespace JobFinder.Data.Migrations
                         .HasForeignKey("JobFinder.Entities.Entities.JobSeeker", "JobSeekerCvId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("JobFinder.Entities.Entities.File", "JobSeekerProfilePhoto")
+                    b.HasOne("JobFinder.Entities.Entities.File", "JobSeekerProfilePicture")
                         .WithOne()
-                        .HasForeignKey("JobFinder.Entities.Entities.JobSeeker", "JobSeekerProfilePhotoId")
+                        .HasForeignKey("JobFinder.Entities.Entities.JobSeeker", "JobSeekerProfilePictureId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("JobFinder.Entities.Entities.UserManagement.User", "User")
@@ -429,7 +429,7 @@ namespace JobFinder.Data.Migrations
 
                     b.Navigation("JobSeekerCv");
 
-                    b.Navigation("JobSeekerProfilePhoto");
+                    b.Navigation("JobSeekerProfilePicture");
 
                     b.Navigation("User");
                 });

@@ -1,12 +1,15 @@
 ﻿using JobFinder.Data;
 using JobFinder.Entities.DTOs.AccountDTOs;
+using JobFinder.Entities.Entities;
 using JobFinder.Entities.Entities.UserManagement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System.Diagnostics.Eventing.Reader;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace JobFinder.Service
 {
@@ -14,7 +17,6 @@ namespace JobFinder.Service
     {
         private readonly IConfiguration _configuration;
         private readonly AppDbContext _context;
-
         public AccountService(IConfiguration configuration, AppDbContext context)
         {
             _configuration = configuration;
@@ -30,14 +32,34 @@ namespace JobFinder.Service
             user = new User
             {
                 Email = request.Email,
-                IsCompany = request.isCompany,
-                Password = request.Password, 
+                IsCompany = request.IsCompany,
+                Password = request.Password,
                 CreationDate = DateTime.Now
             };
-
+            
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+            
+            if (request.IsCompany)
+            {
+                var company = new Company
+                {
+                    Id = user.Id,
+                };
+                await _context.Companies.AddAsync(company);
+            }
 
+            else
+            {
+                var jobSeeker = new JobSeeker
+                {
+                    Id = user.Id
+                };
+                await _context.JobSeekers.AddAsync(jobSeeker);
+            }
+            
+            await _context.SaveChangesAsync();
+            
             return user;
         }
 
@@ -51,6 +73,7 @@ namespace JobFinder.Service
                 return null;
 
             string token = CreateToken(user);
+
             return token;
         }
 

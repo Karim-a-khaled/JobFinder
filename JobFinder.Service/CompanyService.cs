@@ -55,20 +55,30 @@ namespace JobFinder.Service
             company.Name = request.Name;
             company.PhoneNumber = request.PhoneNumber;
             company.CreationDate = DateTime.Now;
-
-            var file = new File
-            {
-                Name = request.CompanyProfilePhoto.FileName,
-                // Path
-                CreationDate = DateTime.Now,
-            };
-            await _context.Files.AddAsync(file);
-            await _context.SaveChangesAsync();
-
-            company.CompanyProfilePictureId = file.Id;
             
-            _context.Companies.Update(company);
+            if(company.CompanyProfilePictureId is null || company.CompanyProfilePictureId == 0)
+            {
+                var file = new File
+                {
+                    Name = request.CompanyProfilePicture.FileName,
+                    Path = $"company-{company.Id}/profilePicture/{company.CompanyProfilePicture.Id}_{company.CompanyProfilePicture.Name}",
+                    CreationDate = DateTime.Now,
+                    ContentType = request.CompanyProfilePicture.ContentType
+                };
+                await _context.Files.AddAsync(file);
+            }
+            else
+            {
+                var file = _context.Files.FirstOrDefault(f => f.Id == company.CompanyProfilePictureId);
+                file.Name = request.CompanyProfilePicture.FileName;
+                file.Path = $"company-{company.Id}/profilePicture/{company.CompanyProfilePicture.Id}_{company.CompanyProfilePicture.Name}";
+                file.ModificationDate = DateTime.Now;
+                file.ContentType = request.CompanyProfilePicture.ContentType;
+                _context.Files.Update(file);
+            }
+
             await _context.SaveChangesAsync();
+            
             return "Updated Succesfuly";
         }
     }
