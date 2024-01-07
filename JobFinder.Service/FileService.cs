@@ -1,6 +1,7 @@
 ﻿using Azure.Core;
 using JobFinder.Data;
 using JobFinder.Entities.DTOs;
+using JobFinder.Entities.DTOs.FileDTOs;
 using JobFinder.Entities.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;

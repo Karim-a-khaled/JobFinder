@@ -1,5 +1,6 @@
 ﻿using JobFinder.Data;
 using JobFinder.Entities.DTOs;
+using JobFinder.Entities.DTOs.JobDTOs;
 using JobFinder.Entities.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -56,7 +57,7 @@ namespace JobFinder.Service
                 {
                     Title = jobDto.Title,
                     Description = jobDto.Description,
-                    CompanyId = jobDto.CompanyId,
+                    //CompanyId = jobDto.CompanyId,
                     CreationDate = DateTime.Now.Date,
                 };
 

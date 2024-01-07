@@ -1,4 +1,5 @@
 ﻿using JobFinder.Entities.DTOs;
+using JobFinder.Entities.DTOs.JobDTOs;
 using JobFinder.Entities.Entities;
 using JobFinder.Service;
 using Microsoft.AspNetCore.Authorization;

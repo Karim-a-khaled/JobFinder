@@ -20,6 +20,7 @@ namespace JobFinder.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileId = table.Column<int>(type: "int", nullable: false),
                     Path = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedById = table.Column<int>(type: "int", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -76,19 +77,19 @@ namespace JobFinder.Data.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CompanyProfilePhotoId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    CompanyProfilePictureId = table.Column<int>(type: "int", nullable: true),
                     CreatedById = table.Column<int>(type: "int", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedById = table.Column<int>(type: "int", nullable: false),
-                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Companies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Companies_Files_CompanyProfilePhotoId",
-                        column: x => x.CompanyProfilePhotoId,
+                        name: "FK_Companies_Files_CompanyProfilePictureId",
+                        column: x => x.CompanyProfilePictureId,
                         principalTable: "Files",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -108,13 +109,13 @@ namespace JobFinder.Data.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     YearsOfExperience = table.Column<int>(type: "int", nullable: false),
                     IsFresh = table.Column<bool>(type: "bit", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     JobSeekerProfilePhotoId = table.Column<int>(type: "int", nullable: true),
                     JobSeekerCvId = table.Column<int>(type: "int", nullable: true),
                     CreatedById = table.Column<int>(type: "int", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedById = table.Column<int>(type: "int", nullable: false),
-                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -223,8 +224,8 @@ namespace JobFinder.Data.Migrations
                 columns: new[] { "Id", "CreatedById", "CreationDate", "ModificationDate", "ModifiedById", "Name" },
                 values: new object[,]
                 {
-                    { 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Local), 0, "JobSeeker" },
-                    { 2, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Local), 0, "Employer" }
+                    { 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 1, 6, 0, 0, 0, 0, DateTimeKind.Local), 0, "JobSeeker" },
+                    { 2, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 1, 6, 0, 0, 0, 0, DateTimeKind.Local), 0, "Employer" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -238,11 +239,11 @@ namespace JobFinder.Data.Migrations
                 column: "JobSeekerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Companies_CompanyProfilePhotoId",
+                name: "IX_Companies_CompanyProfilePictureId",
                 table: "Companies",
-                column: "CompanyProfilePhotoId",
+                column: "CompanyProfilePictureId",
                 unique: true,
-                filter: "[CompanyProfilePhotoId] IS NOT NULL");
+                filter: "[CompanyProfilePictureId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Companies_UserId",

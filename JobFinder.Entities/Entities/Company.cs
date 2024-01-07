@@ -13,7 +13,7 @@ namespace JobFinder.Entities.Entities
 
         public virtual ICollection<Job> Jobs { get; set; }
 
-        public int? CompanyProfilePhotoId { get; set; }
-        public virtual File CompanyProfilePhoto { get; set; }
+        public int? CompanyProfilePictureId { get; set; }
+        public virtual File CompanyProfilePicture { get; set; }
     }
 }

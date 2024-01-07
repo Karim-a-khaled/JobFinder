@@ -1,7 +1,6 @@
 ﻿using JobFinder.Data;
-using JobFinder.Entities.DTOs;
+using JobFinder.Entities.DTOs.JobSeekerDTOs;
 using JobFinder.Entities.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace JobFinder.Service
@@ -45,13 +44,12 @@ namespace JobFinder.Service
 
         public async Task<string> UpdateJobSeeker(UpdateJobSeekerDto request)
         {
-            var jobSeeker = _context.JobSeekers.FirstOrDefault(a => a.UserId == request.UserId);
+            var jobSeeker = _context.JobSeekers.FirstOrDefault(a => a.Id == request.Id);
             
             if (jobSeeker is null)
                 return null;
             
             jobSeeker.Name = request.Name;
-            jobSeeker.Email = request.Email;
             jobSeeker.YearsOfExperience = request.YearsOfExperience;
             jobSeeker.IsFresh = request.IsFresh;
             jobSeeker.CreationDate = DateTime.Now;
@@ -60,7 +58,7 @@ namespace JobFinder.Service
             {
                 var file = new Entities.Entities.File
                 {
-                    Name = request.JobSeekerProfilePhoto.FileName,
+                    Name = request.JobSeekerProfilePicture.FileName,
                     CreationDate = DateTime.Now,
 
                 };
@@ -70,7 +68,7 @@ namespace JobFinder.Service
             else
             {
                 var file = await _context.Files.FirstOrDefaultAsync(f => f.Id == jobSeeker.JobSeekerProfilePhotoId);
-                file.Name = request.JobSeekerProfilePhoto.FileName;
+                file.Name = request.JobSeekerProfilePicture.FileName;
                 //file.Path = 
                 
                 _context.Files.Update(file);
@@ -81,7 +79,7 @@ namespace JobFinder.Service
             {
                 var file = new Entities.Entities.File
                 {
-                    Name = request.CVFile.FileName,
+                    Name = request.CvFile.FileName,
                     //Path = 
                     CreationDate = DateTime.Now,
                 };
@@ -92,7 +90,7 @@ namespace JobFinder.Service
             {
                 
                 var file = await _context.Files.FirstOrDefaultAsync(f => f.Id == jobSeeker.JobSeekerCvId);
-                file.Name = request.CVFile.FileName;
+                file.Name = request.CvFile.FileName;
                 //file.Path = 
 
                 _context.Files.Update(file);

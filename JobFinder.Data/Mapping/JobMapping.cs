@@ -9,14 +9,14 @@ namespace JobFinder.Data.Mapping
         public void Configure(EntityTypeBuilder<Job> builder)
         {
             builder.HasOne(j => j.Company)
-                .WithMany(c => c.Jobs)
-                .HasForeignKey(j => j.CompanyId)
-                .OnDelete(DeleteBehavior.NoAction);
+                   .WithMany(c => c.Jobs)
+                   .HasForeignKey(j => j.CompanyId)
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(j => j.Applications)
-                .WithOne(c => c.Job)
-                .HasForeignKey(j => j.JobId)
-                .OnDelete(DeleteBehavior.NoAction);
+                   .WithOne(c => c.Job)
+                   .HasForeignKey(j => j.JobId)
+                   .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

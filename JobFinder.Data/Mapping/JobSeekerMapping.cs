@@ -14,14 +14,14 @@ namespace JobFinder.Data.Mapping
             // implemented in User Configuration
 
             builder.HasOne(js => js.JobSeekerCv)
-                .WithOne()
-                .HasForeignKey<JobSeeker>(js => js.JobSeekerCvId)
-                .OnDelete(DeleteBehavior.NoAction);
+                   .WithOne()
+                   .HasForeignKey<JobSeeker>(js => js.JobSeekerCvId)
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(js => js.JobSeekerProfilePhoto)
-                .WithOne()
-                .HasForeignKey<JobSeeker>(js => js.JobSeekerProfilePhotoId)
-                .OnDelete(DeleteBehavior.NoAction);
+                   .WithOne()
+                   .HasForeignKey<JobSeeker>(js => js.JobSeekerProfilePhotoId)
+                   .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobFinder.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240102114747_Initial")]
+    [Migration("20240106154838_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -77,7 +77,7 @@ namespace JobFinder.Data.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CompanyProfilePhotoId")
+                    b.Property<int?>("CompanyProfilePictureId")
                         .HasColumnType("int");
 
                     b.Property<int>("CreatedById")
@@ -103,9 +103,9 @@ namespace JobFinder.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyProfilePhotoId")
+                    b.HasIndex("CompanyProfilePictureId")
                         .IsUnique()
-                        .HasFilter("[CompanyProfilePhotoId] IS NOT NULL");
+                        .HasFilter("[CompanyProfilePictureId] IS NOT NULL");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -126,6 +126,9 @@ namespace JobFinder.Data.Migrations
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("FileId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("ModificationDate")
                         .HasColumnType("datetime2");
@@ -270,7 +273,7 @@ namespace JobFinder.Data.Migrations
                             Id = 1,
                             CreatedById = 0,
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModificationDate = new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Local),
+                            ModificationDate = new DateTime(2024, 1, 6, 0, 0, 0, 0, DateTimeKind.Local),
                             ModifiedById = 0,
                             Name = "JobSeeker"
                         },
@@ -279,7 +282,7 @@ namespace JobFinder.Data.Migrations
                             Id = 2,
                             CreatedById = 0,
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModificationDate = new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Local),
+                            ModificationDate = new DateTime(2024, 1, 6, 0, 0, 0, 0, DateTimeKind.Local),
                             ModifiedById = 0,
                             Name = "Employer"
                         });
@@ -382,9 +385,9 @@ namespace JobFinder.Data.Migrations
 
             modelBuilder.Entity("JobFinder.Entities.Entities.Company", b =>
                 {
-                    b.HasOne("JobFinder.Entities.Entities.File", "CompanyProfilePhoto")
+                    b.HasOne("JobFinder.Entities.Entities.File", "CompanyProfilePicture")
                         .WithOne()
-                        .HasForeignKey("JobFinder.Entities.Entities.Company", "CompanyProfilePhotoId")
+                        .HasForeignKey("JobFinder.Entities.Entities.Company", "CompanyProfilePictureId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("JobFinder.Entities.Entities.UserManagement.User", "User")
@@ -393,7 +396,7 @@ namespace JobFinder.Data.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("CompanyProfilePhoto");
+                    b.Navigation("CompanyProfilePicture");
 
                     b.Navigation("User");
                 });

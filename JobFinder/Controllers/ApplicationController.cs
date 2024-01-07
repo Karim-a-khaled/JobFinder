@@ -1,4 +1,4 @@
-﻿using JobFinder.Entities.DTOs;
+﻿using JobFinder.Entities.DTOs.ApplicationDTOs;
 using JobFinder.Entities.Entities;
 using JobFinder.Service;
 using Microsoft.AspNetCore.Authorization;
@@ -42,7 +42,7 @@ namespace JobFinder.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Application>> AddAppplication(ApplicationDto applicationDto)
+        public async Task<ActionResult<Application>> AddAppplication(AddOrUpdateApplicationDto applicationDto)
         {
             var applicationToAdd = await _applicationService.AddApplication(applicationDto);
             if (applicationToAdd is null)

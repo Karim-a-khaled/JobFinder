@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace JobFinder.Entities.DTOs
+namespace JobFinder.Entities.DTOs.AccountDTOs
 {
-    public class RegisterationDto 
+    public class RegisterDto
     {
 
         [Required(ErrorMessage = "FIELD_IS_REQUIRED")]
@@ -11,7 +11,7 @@ namespace JobFinder.Entities.DTOs
 
         [Required(ErrorMessage = "FIELD_IS_REQUIRED")]
         public string Password { get; set; }
-        
+
         [Required(ErrorMessage = "FIELD_IS_REQUIRED")]
         public bool isCompany { get; set; }
     }

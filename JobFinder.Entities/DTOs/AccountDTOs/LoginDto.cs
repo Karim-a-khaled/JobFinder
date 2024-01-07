@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace JobFinder.Entities.DTOs
+namespace JobFinder.Entities.DTOs.AccountDTOs
 {
-    public class LoginDto 
+    public class LoginDto
     {
         [Required(ErrorMessage = "FIELD_IS_REQUIRED")]
         [EmailAddress(ErrorMessage = "Email not valid")]

@@ -1,5 +1,5 @@
 ﻿using JobFinder.Data;
-using JobFinder.Entities.DTOs;
+using JobFinder.Entities.DTOs.CompanyDTOs;
 using JobFinder.Entities.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -65,7 +65,7 @@ namespace JobFinder.Service
             await _context.Files.AddAsync(file);
             await _context.SaveChangesAsync();
 
-            company.CompanyProfilePhotoId = file.Id;
+            company.CompanyProfilePictureId = file.Id;
             
             _context.Companies.Update(company);
             await _context.SaveChangesAsync();

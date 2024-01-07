@@ -1,5 +1,5 @@
 ﻿using JobFinder.Data;
-using JobFinder.Entities.DTOs;
+using JobFinder.Entities.DTOs.ApplicationDTOs;
 using JobFinder.Entities.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,7 +29,7 @@ namespace JobFinder.Service
             return application;
         }
 
-        public async Task<Application> AddApplication(ApplicationDto applicationDto)
+        public async Task<Application> AddApplication(AddOrUpdateApplicationDto applicationDto)
         {
             var existingApplication = await _context.Applications.FindAsync();
 

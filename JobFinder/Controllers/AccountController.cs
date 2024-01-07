@@ -1,4 +1,4 @@
-﻿using JobFinder.Entities.DTOs;
+﻿using JobFinder.Entities.DTOs.AccountDTOs;
 using JobFinder.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -18,7 +18,7 @@ namespace JobFinder.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<string> Register(RegisterationDto userRegisterDto)
+        public async Task<string> Register(RegisterDto userRegisterDto)
         {
             var result = await _accountService.Register(userRegisterDto);
 

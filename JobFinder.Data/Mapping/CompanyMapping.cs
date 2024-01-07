@@ -11,9 +11,9 @@ namespace JobFinder.Data.Mapping
             // implemented in Job Configuration
             // implemented in User Configuration
 
-            builder.HasOne(c => c.CompanyProfilePhoto)
+            builder.HasOne(c => c.CompanyProfilePicture)
                    .WithOne()
-                   .HasForeignKey<Company>(c => c.CompanyProfilePhotoId)
+                   .HasForeignKey<Company>(c => c.CompanyProfilePictureId)
                    .OnDelete(DeleteBehavior.NoAction);
         }
     }

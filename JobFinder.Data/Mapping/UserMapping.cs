@@ -23,14 +23,14 @@ namespace JobFinder.Data.Mapping
             // imlemented in UserRole Configuration
 
             builder.HasOne(u => u.JobSeeker)
-                .WithOne(js => js.User)
-                .HasForeignKey<JobSeeker>(js => js.UserId)
-                .OnDelete(DeleteBehavior.NoAction);
+                   .WithOne(js => js.User)
+                   .HasForeignKey<JobSeeker>(js => js.UserId)
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(u => u.Company)
-                .WithOne(js => js.User)
-                .HasForeignKey<Company>(c => c.UserId)
-                .OnDelete(DeleteBehavior.NoAction);
+                   .WithOne(js => js.User)
+                   .HasForeignKey<Company>(c => c.UserId)
+                   .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

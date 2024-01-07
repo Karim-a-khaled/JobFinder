@@ -1,5 +1,5 @@
 ﻿using JobFinder.Data;
-using JobFinder.Entities.DTOs;
+using JobFinder.Entities.DTOs.AccountDTOs;
 using JobFinder.Entities.Entities.UserManagement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +21,7 @@ namespace JobFinder.Service
             _context = context;
         }
 
-        public async Task<User> Register(RegisterationDto request)
+        public async Task<User> Register(RegisterDto request)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email); 
             if (user != null)
@@ -36,12 +36,6 @@ namespace JobFinder.Service
             };
 
             await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
-
-            var profile = new UserFactory().DeterminUser(request.isCompany);
-            profile.UserId = user.Id;
-
-            await _context.AddAsync(profile);
             await _context.SaveChangesAsync();
 
             return user;
