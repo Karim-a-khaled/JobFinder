@@ -44,7 +44,7 @@ namespace JobFinder.Service
             {
                 var company = new Company
                 {
-                    Id = user.Id,
+                    UserId = user.Id,
                 };
                 await _context.Companies.AddAsync(company);
             }
@@ -53,7 +53,7 @@ namespace JobFinder.Service
             {
                 var jobSeeker = new JobSeeker
                 {
-                    Id = user.Id
+                    UserId = user.Id
                 };
                 await _context.JobSeekers.AddAsync(jobSeeker);
             }
