@@ -37,6 +37,7 @@ namespace JobFinder.Service
         public async Task<Application> AddApplication(AddOrUpdateApplicationDto applicationDto)
         {
             var existingApplication = await _context.Applications.FindAsync();
+            var userId = _userService.GetUserId();
 
             if (existingApplication != null)
             {
@@ -46,7 +47,9 @@ namespace JobFinder.Service
             var applicationToAdd = new Application
             {
                 CoverLetter = applicationDto.CoverLetter,
-                CreationDate = DateTime.Now.Date
+                CreationDate = DateTime.Now.Date,
+                JobId = applicationDto.JobId,
+                JobSeekerId = (int)userId
             };
 
             await _context.AddAsync(applicationToAdd);

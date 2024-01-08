@@ -14,5 +14,6 @@ namespace JobFinder.Entities.DTOs.ApplicationDTOs
         public bool IsSubmitted { get; set; }
         public string CoverLetter { get; set; }
         public IFormFile File { get; set; }
+        public int UserId { get; set; }
     }
 }
