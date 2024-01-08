@@ -9,9 +9,14 @@ namespace JobFinder.Service
     public class ApplicationService
     {
         private readonly AppDbContext _context;
-        public ApplicationService(AppDbContext context)
+        private readonly UserService _userService;
+        private readonly FileService _fileService;
+
+        public ApplicationService(AppDbContext context, UserService userService, FileService fileService)
         {
             _context = context;
+            _userService = userService;
+            _fileService = fileService;
         }
 
         public async Task<IEnumerable<Application>> GetApplications()

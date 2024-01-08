@@ -17,7 +17,9 @@ namespace JobFinder.Service
 
         public async Task<IEnumerable<Company>> GetCompanies()
         {
-            var companies = await _context.Companies.ToListAsync();
+            var companies = await _context.Companies
+                .Include(c => c.CompanyProfilePicture)
+                .ToListAsync();
             if (companies is null)
                 return null;
 
@@ -26,7 +28,9 @@ namespace JobFinder.Service
 
         public async Task<Company> GetCompany(int id)
         {
-            var company = await _context.Companies.FirstOrDefaultAsync(js => js.Id == id);
+            var company = await _context.Companies
+                .Include (c => c.CompanyProfilePicture)
+                .FirstOrDefaultAsync(c => c.Id == id);
             if (company is null)
                 return null;
 

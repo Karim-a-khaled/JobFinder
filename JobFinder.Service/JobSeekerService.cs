@@ -16,7 +16,10 @@ namespace JobFinder.Service
 
         public async Task<IEnumerable<JobSeeker>> GetJobSeekers()
         {
-            var jobSeekers = await _context.JobSeekers.ToListAsync();
+            var jobSeekers = await _context.JobSeekers
+                .Include(js => js.JobSeekerProfilePicture)
+                .Include(js => js.JobSeekerCv)
+                .ToListAsync();
             if (jobSeekers is null)
                 return null;
 
@@ -25,7 +28,10 @@ namespace JobFinder.Service
 
         public async Task<JobSeeker> GetJobSeeker(int id)
         {
-            var jobSeeker = await _context.JobSeekers.FirstOrDefaultAsync(js => js.Id == id);
+            var jobSeeker = await _context.JobSeekers
+                .Include(js => js.JobSeekerProfilePicture)
+                .Include(js => js.JobSeekerCv)
+                .FirstOrDefaultAsync(js => js.Id == id);
             if (jobSeeker is null)
                 return null;
 
