@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobFinder.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240106154838_Initial")]
+    [Migration("20240108122825_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -41,9 +41,6 @@ namespace JobFinder.Data.Migrations
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsSubmitted")
-                        .HasColumnType("bit");
 
                     b.Property<int>("JobId")
                         .HasColumnType("int");
@@ -121,6 +118,9 @@ namespace JobFinder.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ContentType")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CreatedById")
                         .HasColumnType("int");
 
@@ -197,9 +197,6 @@ namespace JobFinder.Data.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsFresh")
                         .HasColumnType("bit");
 
@@ -273,7 +270,7 @@ namespace JobFinder.Data.Migrations
                             Id = 1,
                             CreatedById = 0,
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModificationDate = new DateTime(2024, 1, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            ModificationDate = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Local),
                             ModifiedById = 0,
                             Name = "JobSeeker"
                         },
@@ -282,7 +279,7 @@ namespace JobFinder.Data.Migrations
                             Id = 2,
                             CreatedById = 0,
                             CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModificationDate = new DateTime(2024, 1, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            ModificationDate = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Local),
                             ModifiedById = 0,
                             Name = "Employer"
                         });

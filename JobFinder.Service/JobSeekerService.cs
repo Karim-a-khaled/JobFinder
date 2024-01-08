@@ -71,7 +71,7 @@ namespace JobFinder.Service
             {
                 var file = await _context.Files.FirstOrDefaultAsync(f => f.Id == jobSeeker.JobSeekerProfilePictureId);
                 file.Name = request.JobSeekerProfilePicture.FileName;
-                file.Path = $"jobSeeker-{jobSeeker.Id}/profilePicture/{jobSeeker.JobSeekerProfilePicture.Id}-{jobSeeker.JobSeekerProfilePicture.Name}",
+                file.Path = $"jobSeeker-{jobSeeker.Id}/profilePicture/{jobSeeker.JobSeekerProfilePicture.Id}-{jobSeeker.JobSeekerProfilePicture.Name}";
                 file.ContentType = request.JobSeekerProfilePicture.ContentType;
 
                 _context.Files.Update(file);

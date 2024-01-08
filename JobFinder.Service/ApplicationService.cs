@@ -40,7 +40,6 @@ namespace JobFinder.Service
 
             var applicationToAdd = new Application
             {
-                IsSubmitted = applicationDto.IsSubmitted,
                 CoverLetter = applicationDto.CoverLetter,
                 CreationDate = DateTime.Now.Date
             };

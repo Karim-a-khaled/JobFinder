@@ -14,6 +14,8 @@ namespace JobFinder.API.Extensions
             services.AddScoped<JobSeekerService>();
             services.AddScoped<CompanyService>();
             services.AddScoped<JobService>();
+            services.AddScoped<FileService>();
+            services.AddScoped<UserService>();
             services.AddHttpContextAccessor();
             services.AddControllers();
             services.AddEndpointsApiExplorer();
