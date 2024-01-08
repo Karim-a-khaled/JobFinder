@@ -16,75 +16,86 @@ namespace JobFinder.Service
     public class FileService
     {
         private readonly AppDbContext _context;
-        public FileService(AppDbContext context)
+        private readonly UserService _userService;
+
+        public FileService(AppDbContext context, UserService userService)
         {
             _context = context;
+            _userService = userService;
         }
 
-        public async Task<IEnumerable<Entities.Entities.File>> GetFiles()
+        public async Task UpdateFile(AddOrUpdateFileDto file)
         {
-            var files = await _context.Files.ToListAsync();
-            if (files is null)
-                return null;
+            var userId = (int)_userService.GetUserId();
+            var profilePictureFile = await _context.Files.FindAsync(file.Id);
+            if (profilePictureFile is null)
+                throw new Exception("Invalid Profile Picture Id");
 
-            return files;
-        }
+            profilePictureFile.Path = file.Path;
+            profilePictureFile.Name = file.Name;
+            profilePictureFile.ModificationDate = DateTime.Now.Date;
+            profilePictureFile.ModifiedById = userId;
 
-        public async Task<Entities.Entities.File> GetFile(int id)
-        {
-            var file = await _context.Files.FirstOrDefaultAsync(js => js.Id == id);
-            if (file is null)
-                return null;
-
-            return file;
-        }
-
-        public async Task<string> DeleteFile(int id)
-        {
-            var file = _context.Files.FirstOrDefault(a => a.Id == id);
-            if (file is null)
-                return null;
-
-            _context.Files.Remove(file);
+            _context.Update(profilePictureFile);
             await _context.SaveChangesAsync();
-            return "Deleted Succesfuly";
+
+            string currentDirectory = Directory.GetCurrentDirectory();
+
+            var pathToSave = Path.Combine(currentDirectory, file.Path);
+            Directory.CreateDirectory(Path.GetDirectoryName(pathToSave));
+            await using var fileStream = new FileStream(pathToSave, FileMode.Create);
+            await file.File.CopyToAsync(fileStream);
         }
-        public async Task<string> AddFile(AddOrUpdateFileDto request)
+
+       
+        // Done
+        public async Task<Entities.Entities.File> AddFile(AddOrUpdateFileDto file)
         {
-            var fileToAdd = await _context.Files.FirstOrDefaultAsync(f => f.Name == request.Name && f.Path == request.Path);
-
-            if (fileToAdd is not null)
-                return null;
-
-            fileToAdd = new Entities.Entities.File
+            var userId = (int)_userService.GetUserId();
+            var fileToCreate = new Entities.Entities.File
             {
-                Name = request.Name,
-                Path = request.Path,
-                CreationDate = DateTime.Now,
+                Name = file.Name,
+                FileId = file.FileId,
+                Path = file.Path,
+                CreatedById = userId,
+                CreationDate = DateTime.Now.Date,
+                ContentType = file.File.ContentType
             };
-
-            await _context.Files.AddAsync(fileToAdd);
+            // Save File in the DB
+            await _context.Files.AddAsync(fileToCreate);
             await _context.SaveChangesAsync();
-            return "Added Succesfuly";
+
+            // Save File Locally
+            string currentDirectory = Directory.GetCurrentDirectory();
+            var pathToSave = Path.Combine(currentDirectory, file.Path);
+            Directory.CreateDirectory(Path.GetDirectoryName(pathToSave));
+
+            await using var fileStream = new FileStream(pathToSave, FileMode.Create);
+            await file.File.CopyToAsync(fileStream);
+
+            return fileToCreate;
         }
 
-        public async Task<string> UpdateFile(AddOrUpdateFileDto request)
+        public async Task<FileDto> GetFileById(int id)
         {
-            var fileToUpdate = await _context.Files.FirstOrDefaultAsync(f => f.Name == request.Name && f.Path == request.Path);
+            var file = await _context.Files.FindAsync(id);
+            if (file == null)
+                throw new Exception("File Does Not Exist");
 
-            if (fileToUpdate is null)
-                return null;
-
-            fileToUpdate = new Entities.Entities.File
+            byte[] existingContent;
+            using (var existingFileStream = new FileStream(file.Path, FileMode.Open, FileAccess.Read))
             {
-                Name = request.Name,
-                Path = request.Path,
-                ModificationDate = DateTime.Now,
+                using (var memoryStream = new MemoryStream())
+                {
+                    await existingFileStream.CopyToAsync(memoryStream);
+                    existingContent = memoryStream.ToArray();
+                }
+            }
+            return new FileDto
+            {
+                Content = existingContent,
+                ContentType = file.ContentType
             };
-
-            _context.Files.Update(fileToUpdate);
-            await _context.SaveChangesAsync();
-            return "Updated Succesfuly";
         }
     }
 }
